@@ -1,0 +1,10 @@
+@mixin maxBreakpoint {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+@mixin tablet {
+  @media (min-width: 768px) {
+    @content;
+  }
+}

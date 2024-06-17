@@ -1,0 +1,52 @@
+@use "../../partials/mixins" as *;
+@use "../../partials/variables" as *;
+
+.nav {
+  @include maxBreakpoint;
+  @include tablet {
+    padding-left: $tab-hor-pad;
+    padding-right: $tab-hor-pad;
+  }
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  justify-content: center;
+  align-items: baseline;
+
+  @include tablet {
+    justify-content: normal;
+  }
+
+  &__item {
+    text-align: center;
+    &--large {
+      min-width: 100%;
+      @include tablet {
+        min-width: auto;
+      }
+    }
+    &--left-margin {
+      @include tablet {
+        margin-left: auto;
+      }
+    }
+  }
+
+  &__link {
+    color: inherit;
+    text-decoration: none;
+
+    &--large {
+      font-size: 1.75rem;
+      text-align: center;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

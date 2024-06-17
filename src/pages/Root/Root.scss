@@ -1,0 +1,10 @@
+@use "../../partials/variables" as *;
+
+.header {
+  padding: 1rem $mob-hor-pad;
+  background-color: #7d007d;
+  border-bottom: 3.5px solid #000;
+  color: #f8f8f8;
+  position: sticky;
+  top: 0;
+}
