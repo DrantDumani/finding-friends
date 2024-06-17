@@ -1,4 +1,5 @@
 @use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
 
 .header {
   padding: 1rem $mob-hor-pad;
@@ -7,4 +8,14 @@
   color: #f8f8f8;
   position: sticky;
   top: 0;
+
+  @include tablet {
+    padding-left: $tab-hor-pad;
+    padding-right: $tab-hor-pad;
+  }
+
+  @include desktop {
+    padding-left: $desk-hor-pad;
+    padding-right: $desk-hor-pad;
+  }
 }

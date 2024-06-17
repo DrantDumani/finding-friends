@@ -3,10 +3,6 @@
 
 .nav {
   @include maxBreakpoint;
-  @include tablet {
-    padding-left: $tab-hor-pad;
-    padding-right: $tab-hor-pad;
-  }
 }
 
 .nav-list {
