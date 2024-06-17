@@ -1,7 +1,6 @@
 import { Home } from "./Home";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
-import { expect, it } from "vitest";
 
 const mockData = [
   {
@@ -36,7 +35,7 @@ describe("Home page", () => {
     expect(title).toBeInTheDocument();
   });
 
-  it("should links, images, and captions for all games", async () => {
+  it("should render links, images, and captions for all games", async () => {
     const router = createMemoryRouter(mockRoutes, { initialEntries: ["/"] });
     render(<RouterProvider router={router} />);
 
