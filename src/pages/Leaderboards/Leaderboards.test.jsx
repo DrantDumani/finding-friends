@@ -4,48 +4,73 @@ import { render, screen } from "@testing-library/react";
 
 const mockData = [
   {
+    name: "Shine",
+    score: 138948,
+    date: 100000000,
     _id: 1,
-    name: "Poppy",
-    thumbnail: "poppy.jpg",
   },
   {
+    name: "Bright",
+    score: 7000,
+    date: 200000000,
     _id: 2,
-    name: "Bros",
-    thumbnail: "bros.png",
   },
   {
+    name: "Kracko",
+    score: 1000,
+    date: 500000000,
     _id: 3,
-    name: "Jr",
-    thumbnail: "jr.jpg",
   },
 ];
 
-const mockRoutes = [
-  {
-    path: "/",
-    element: <Leaderboards />,
-    loader: async () => mockData,
-  },
-];
-
-describe("Leaderboards page", () => {
-  it("Should render buttons for all games", async () => {
+describe("Leaderboard", () => {
+  it("renders a score for every leaderboard entry", async () => {
     const mockRoute = [
       {
         path: "/",
         element: <Leaderboards />,
-        loader: async () => ({ icons: mockData }),
+        loader: async () => mockData,
       },
     ];
-    const router = createMemoryRouter(mockRoutes);
+
+    const router = createMemoryRouter(mockRoute);
     render(<RouterProvider router={router} />);
 
-    const btns = await screen.findAllByRole("button");
-    expect(btns.length).toBe(3);
-    expect(btns[0].textContent).toBe("Poppy");
-    expect(btns[1].textContent).toBe("Bros");
-    expect(btns[2].textContent).toBe("Jr");
+    const scores = await screen.findAllByRole("listitem");
+    expect(scores.length).toBe(3);
   });
 
-  it("should render text ");
+  it("renders score in mm:ss:ms format", async () => {
+    const mockRoute = [
+      {
+        path: "/",
+        element: <Leaderboards />,
+        loader: async () => mockData,
+      },
+    ];
+
+    const router = createMemoryRouter(mockRoute);
+    render(<RouterProvider router={router} />);
+
+    const times = await screen.findAllByTestId("score-time");
+    expect(times[0].textContent).toBe("02:18:95");
+  });
+
+  it("renders 'No one has found friends here yet' if there are no leaderboard entries", async () => {
+    const mockRoute = [
+      {
+        path: "/",
+        element: <Leaderboards />,
+        loader: async () => [],
+      },
+    ];
+
+    const router = createMemoryRouter(mockRoute);
+    render(<RouterProvider router={router} />);
+
+    const noScores = await screen.findByRole("heading", {
+      name: /No one has found friends here yet/,
+    });
+    expect(noScores).toBeInTheDocument();
+  });
 });

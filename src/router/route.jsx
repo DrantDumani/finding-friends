@@ -4,6 +4,7 @@ import { Game } from "../pages/Game/Game";
 import { Home } from "../pages/Home/Home";
 import { Leaderboards } from "../pages/Leaderboards/Leaderboards";
 import { Error } from "../pages/Error/Error";
+import { LeaderboardSelector } from "../pages/LeaderboardSelector/LeaderboardSelector";
 
 export const routes = [
   {
@@ -27,8 +28,14 @@ export const routes = [
             path: "game/:gameId",
           },
           {
-            element: <Leaderboards />,
+            element: <LeaderboardSelector />,
             path: "leaderboards",
+            children: [
+              {
+                path: ":gameId",
+                element: <Leaderboards />,
+              },
+            ],
           },
         ],
       },
