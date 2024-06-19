@@ -1,0 +1,44 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+
+.about-wrapper {
+  background-color: #000000;
+  color: #fefefe;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  padding: 1rem $mob-hor-pad;
+
+  @include tablet {
+    padding-left: $tab-hor-pad;
+    padding-right: $tab-hor-pad;
+  }
+}
+
+.about-credits {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem 0;
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__link-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: #fcabfc;
+    &:hover {
+      color: #f946f9;
+    }
+  }
+}

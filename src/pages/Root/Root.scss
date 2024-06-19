@@ -1,0 +1,25 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+
+.header {
+  padding: 1rem $mob-hor-pad;
+  background-color: #7d007d;
+  border-bottom: 3.5px solid #000;
+  color: #f8f8f8;
+  position: sticky;
+  top: 0;
+
+  @include tablet {
+    padding-left: $tab-hor-pad;
+    padding-right: $tab-hor-pad;
+  }
+
+  @include desktop {
+    padding-left: $desk-hor-pad;
+    padding-right: $desk-hor-pad;
+  }
+}
+
+.main {
+  flex-grow: 1;
+}
