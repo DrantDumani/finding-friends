@@ -1,6 +1,7 @@
 import { Root } from "../pages/Root/Root";
 import { About } from "../pages/About/About";
 import { Game } from "../pages/Game/Game";
+import { GameInstance } from "../pages/GameInstance/GameInstance";
 import { Home } from "../pages/Home/Home";
 import { Leaderboards } from "../pages/Leaderboards/Leaderboards";
 import { Error } from "../pages/Error/Error";
@@ -26,6 +27,12 @@ export const routes = [
           {
             element: <Game />,
             path: "game/:gameId",
+            children: [
+              {
+                path: ":gameId",
+                element: <GameInstance />,
+              },
+            ],
           },
           {
             element: <LeaderboardSelector />,
