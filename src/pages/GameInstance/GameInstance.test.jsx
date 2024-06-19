@@ -1,7 +1,7 @@
 import { GameInstance } from "./GameInstance";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 
 const mockData = {
@@ -11,13 +11,13 @@ const mockData = {
   createdAt: new Date(Date.now() - 20000),
   chars: [
     {
-      _id: 1,
+      _id: "1",
       name: "Miracle",
       image: "miracle_matter.png",
       found: false,
     },
     {
-      _id: 2,
+      _id: "2",
       name: "Dark",
       image: "dark_matter.png",
       found: true,
@@ -34,8 +34,6 @@ const mockRoute = [
 ];
 
 describe("Game Instance", () => {
-  // user is shown their score and a form to submit their name
-
   it("screen displays characters and names", async () => {
     const router = createMemoryRouter(mockRoute);
     render(<RouterProvider router={router} />);
@@ -88,13 +86,13 @@ describe("Game Instance", () => {
       updatedAt: new Date(Date.now()),
       chars: [
         {
-          _id: 1,
+          _id: "1",
           name: "Miracle",
           image: "miracle_matter.png",
           found: true,
         },
         {
-          _id: 2,
+          _id: "2",
           name: "Dark",
           image: "dark_matter.png",
           found: true,
@@ -121,14 +119,17 @@ describe("Game Instance", () => {
     expect(scoreText).toBeInTheDocument();
   });
 
-  //   it("increments timer every second", async () => {
-  //     const router = createMemoryRouter(mockRoute);
-  //     render(<RouterProvider router={router} />);
-  //     const time = await screen.findByText("00:20");
+  it("increments timer every second", async () => {
+    const router = createMemoryRouter(mockRoute);
+    render(<RouterProvider router={router} />);
+    const time = await screen.findByText("00:20");
+    expect(time).toBeInTheDocument();
 
-  //     vi.useFakeTimers();
-  //     vi.advanceTimersByTime(1300);
+    vi.useFakeTimers();
+    vi.advanceTimersByTime(9000);
+    vi.clearAllTimers();
+    const updatedTime = await screen.findByText("00:21");
 
-  //     expect(time.textContent).toBe("00:21");
-  //   });
+    expect(updatedTime.textContent).toBe("00:21");
+  });
 });

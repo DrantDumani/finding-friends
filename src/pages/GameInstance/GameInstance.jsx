@@ -19,7 +19,9 @@ export function GameInstance() {
   };
 
   useEffect(() => {
-    const id = setInterval(() => setTimer((t) => t + 1000), 1000);
+    const id = setInterval(() => {
+      setTimer((t) => t + 1000);
+    }, 1000);
 
     return () => clearInterval(id);
   }, []);
@@ -29,7 +31,6 @@ export function GameInstance() {
     .map((char) => ({ _id: char._id, name: char.name }));
 
   const allFriendsFound = gameInfo.chars.every((char) => char.found);
-  console.log(gameInfo.chars[0]);
 
   return !allFriendsFound ? (
     <div className="game-screen">
