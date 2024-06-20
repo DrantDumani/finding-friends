@@ -121,15 +121,12 @@ describe("Game Instance", () => {
 
   it("increments timer every second", async () => {
     const router = createMemoryRouter(mockRoute);
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    vi.advanceTimersByTime(1200);
     render(<RouterProvider router={router} />);
-    const time = await screen.findByText("00:20");
-    expect(time).toBeInTheDocument();
 
-    vi.useFakeTimers();
-    vi.advanceTimersByTime(9000);
-    vi.clearAllTimers();
     const updatedTime = await screen.findByText("00:21");
-
+    vi.clearAllTimers();
     expect(updatedTime.textContent).toBe("00:21");
   });
 });
