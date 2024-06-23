@@ -6,6 +6,7 @@ import { Home } from "../pages/Home/Home";
 import { Leaderboards } from "../pages/Leaderboards/Leaderboards";
 import { Error } from "../pages/Error/Error";
 import { LeaderboardSelector } from "../pages/LeaderboardSelector/LeaderboardSelector";
+import { getThumbnails } from "../modules/loaders";
 
 export const routes = [
   {
@@ -18,6 +19,7 @@ export const routes = [
         children: [
           {
             element: <Home />,
+            loader: getThumbnails,
             index: true,
           },
           {

@@ -20,9 +20,16 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
-@mixin thumbnail {
-  border: 2px solid #000;
-  &:hover {
+@mixin thumbnail-link {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  &:hover img {
     border-width: 5px;
   }
+}
+
+@mixin thumbnail {
+  border: 2px solid #000;
+  width: 100%;
 }

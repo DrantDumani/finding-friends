@@ -18,9 +18,13 @@ export function Home() {
       {games.length > 0 && (
         <div className="link-grid">
           {games.map((game) => (
-            <Link key={game._id} to={`game/${game._id}`}>
+            <Link
+              className="link-grid__link"
+              key={game._id}
+              to={`game/${game._id}`}
+            >
               <figure>
-                <img className="link-grid__image" src={game.image} alt="" />
+                <img className="link-grid__image" src={game.thumbnail} alt="" />
                 <figcaption className="link-grid__caption">
                   {game.name}
                 </figcaption>

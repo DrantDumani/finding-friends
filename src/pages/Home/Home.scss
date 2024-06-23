@@ -16,7 +16,13 @@
 }
 
 .link-grid {
+  display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+
+  &__link {
+    @include thumbnail-link;
+  }
 
   &__image {
     @include thumbnail;
