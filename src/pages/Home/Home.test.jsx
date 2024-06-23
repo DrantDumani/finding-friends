@@ -39,11 +39,19 @@ describe("Home page", () => {
     const router = createMemoryRouter(mockRoutes, { initialEntries: ["/"] });
     render(<RouterProvider router={router} />);
 
-    const gameLinks = await screen.findAllByRole("link");
+    const [gameLinks, images] = await Promise.all([
+      screen.findAllByRole("link"),
+      screen.findAllByRole("presentation"),
+    ]);
 
     expect(gameLinks.length).toBe(3);
     expect(gameLinks[0].textContent).toBe("Poppy");
     expect(gameLinks[1].textContent).toBe("Bros");
     expect(gameLinks[2].textContent).toBe("Jr");
+
+    expect(images.length).toBe(3);
+    expect(images[0]).toHaveAttribute("src", "poppy.jpg");
+    expect(images[1]).toHaveAttribute("src", "bros.png");
+    expect(images[2]).toHaveAttribute("src", "jr.jpg");
   });
 });
