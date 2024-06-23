@@ -1,0 +1,39 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+
+.thumbnail-wrapper {
+  @include maxBreakpoint;
+  padding: $mob-hor-pad;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  @include tablet {
+    padding: $tab-ver-pad $tab-hor-pad;
+  }
+
+  &__title,
+  &__gameForm {
+    text-align: center;
+  }
+
+  &__btn {
+    @include form-btn;
+  }
+}
+
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+
+  &__image {
+    width: 100%;
+    height: 12.5rem;
+    object-fit: contain;
+  }
+
+  &__caption {
+    text-align: center;
+    font-size: 1.375rem;
+  }
+}

@@ -1,28 +1,38 @@
 import { useLoaderData, useFetcher } from "react-router-dom";
+import "./Game.scss";
 
 export function Game() {
-  const data = useLoaderData() || {};
+  const gameData = useLoaderData() || {};
   const instanceSkeleton = {
-    gameId: data.gameId,
-    chars: data.chars.map((char) => ({ charId: char._id })),
+    gameId: gameData.game._id,
+    chars: gameData.characters.map((char) => char._id),
   };
   const fetcher = useFetcher();
 
   return (
     <div className="thumbnail-wrapper">
+      <h1 className="thumbnail-wrapper__title">Find all of these friends!</h1>
       <div className="thumbnail-grid">
-        {data.chars.map((char) => (
-          <div key={char._id}>
-            <img className="filler" src={char.image} alt="" />
-            <p data-testid="char-name">{char.name}</p>
-          </div>
+        {gameData.characters.map((char) => (
+          <figure key={char._id}>
+            <img className="thumbnail-grid__image" src={char.image} alt="" />
+            <figcaption
+              className="thumbnail-grid__caption"
+              data-testid="char-name"
+            >
+              {char.name}
+            </figcaption>
+          </figure>
         ))}
-
-        <fetcher.Form method="POST">
-          <input type="hidden" value={JSON.stringify(instanceSkeleton)} />
-          <button>Start</button>
-        </fetcher.Form>
       </div>
+      <fetcher.Form className="thumbnail-wrapper__gameForm" method="POST">
+        <input
+          type="hidden"
+          name="instance"
+          value={JSON.stringify(instanceSkeleton)}
+        />
+        <button className="thumbnail-wrapper__btn">Start</button>
+      </fetcher.Form>
     </div>
   );
 }

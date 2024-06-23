@@ -33,3 +33,16 @@
   border: 2px solid #000;
   width: 100%;
 }
+
+@mixin form-btn {
+  padding: 0.5rem;
+  background-color: inherit;
+  border: 1.4px solid #000;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 32px;
+  cursor: pointer;
+  &:hover {
+    background-color: #eec1ff;
+  }
+}
