@@ -1,0 +1,28 @@
+@use "../../partials/mixins" as *;
+
+.plyr-choice-container {
+  position: absolute;
+  background-color: #202020;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  &__btn {
+    padding: 0.4rem;
+    font-family: inherit;
+    font-size: 0.6875rem;
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      background-color: #3f3f3f;
+    }
+
+    @include tablet {
+      font-size: 1rem;
+    }
+  }
+}

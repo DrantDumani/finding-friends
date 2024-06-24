@@ -6,7 +6,12 @@ import { Home } from "../pages/Home/Home";
 import { Leaderboards } from "../pages/Leaderboards/Leaderboards";
 import { Error } from "../pages/Error/Error";
 import { LeaderboardSelector } from "../pages/LeaderboardSelector/LeaderboardSelector";
-import { getThumbnails } from "../modules/loaders";
+import {
+  getThumbnails,
+  getGameData,
+  getGameInstance,
+} from "../modules/loaders";
+import { createInstance, gameInstanceAction } from "../modules/actions";
 
 export const routes = [
   {
@@ -29,13 +34,18 @@ export const routes = [
           {
             element: <Game />,
             path: "game/:gameId",
-            children: [
-              {
-                path: ":gameId",
-                element: <GameInstance />,
-              },
-            ],
+            loader: getGameData,
+            action: createInstance,
           },
+          // children: [
+          {
+            path: "gameInstance/:gameInstanceId",
+            element: <GameInstance />,
+            loader: getGameInstance,
+            action: gameInstanceAction,
+          },
+          // ],
+          // },
           {
             element: <LeaderboardSelector />,
             path: "leaderboards",

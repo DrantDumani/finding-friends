@@ -5,21 +5,18 @@ import { expect, it, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 
 const mockData = {
-  _id: 1,
-  gameId: 1,
-  image: "ripple_star.png",
+  gameId: {
+    _id: 1,
+    image: "ripple_star.png",
+  },
   createdAt: new Date(Date.now() - 20000),
   chars: [
     {
-      _id: "1",
-      name: "Miracle",
-      image: "miracle_matter.png",
+      char: { _id: "1", name: "Miracle", image: "miracle_matter.png" },
       found: false,
     },
     {
-      _id: "2",
-      name: "Dark",
-      image: "dark_matter.png",
+      char: { _id: "2", name: "Dark", image: "dark_matter.png" },
       found: true,
     },
   ],
