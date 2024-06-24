@@ -5,9 +5,7 @@ export function convertMs(timestamp, includeMs = false) {
 
   const timeStr = `${String(minutes).padStart(2, "0")}:${String(
     seconds
-  ).padStart(2, "0")}:${String(Math.ceil(ms / 10) * 10)
-    .slice(0, 2)
-    .padStart(2, "0")}`;
+  ).padStart(2, "0")}:${String(ms).slice(0, 2).padStart(2, "0")}`;
 
   return includeMs ? timeStr : timeStr.slice(0, 5);
 }
