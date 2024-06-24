@@ -1,5 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import { convertMs, convertDate } from "../../modules/convertTime";
+import Crown from "../../assets/images/crown.svg?react";
 import "./Leaderboards.scss";
 
 export function Leaderboards() {
@@ -18,7 +19,7 @@ export function Leaderboards() {
           <ul className="score-list">
             {scoreList.map((score, i) => (
               <li className="score-list__item" key={score._id}>
-                <span>{i + 1}</span>
+                <span>{i === 0 ? <Crown /> : i + 1}</span>
                 <span>{score.name}</span>
                 <span data-testid="score-time">{convertMs(score.score)}</span>
                 <span>{convertDate(score.date)}</span>
