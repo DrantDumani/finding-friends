@@ -1,6 +1,5 @@
-import { useLoaderData, useFetcher } from "react-router-dom";
-import { useState, useEffect, useId, useRef } from "react";
-// import { convertMs } from "../../modules/convertTime";
+import { useLoaderData } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 import { Dropdown } from "../../components/Dropdown/Dropdown";
 import { GameBar } from "../../components/Gamebar/Gamebar";
 import { ScoreForm } from "../../components/ScoreForm/ScoreForm";
@@ -8,13 +7,11 @@ import "./GameInstance.scss";
 
 export function GameInstance() {
   const gameInfo = useLoaderData();
-  const fetcher = useFetcher();
   const elapsedTime =
     gameInfo.updatedAt &&
     Date.parse(gameInfo.updatedAt) - Date.parse(gameInfo.createdAt);
   const [showChoices, setShowChoices] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const inputId = useId();
   const imageRef = useRef(null);
 
   const displayDropdown = (e) => {
@@ -65,13 +62,6 @@ export function GameInstance() {
       </div>
     </div>
   ) : (
-    <ScoreForm elapsedTime={elapsedTime} />
-    // <div className="game-screen__victory">
-    //   <h1>Friends found in {convertMs(elapsedTime)}</h1>
-    //   <fetcher.Form method="POST">
-    //     <label htmlFor={inputId}>Enter your name</label>
-    //     <input id={inputId} name="player-name" />
-    //   </fetcher.Form>
-    // </div>
+    <ScoreForm elapsedTime={elapsedTime} gameId={gameInfo.gameId._id} />
   );
 }

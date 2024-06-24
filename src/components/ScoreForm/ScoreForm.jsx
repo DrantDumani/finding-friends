@@ -4,7 +4,7 @@ import { useId } from "react";
 import PropTypes from "prop-types";
 import "./ScoreForm.scss";
 
-export function ScoreForm({ elapsedTime }) {
+export function ScoreForm({ elapsedTime, gameId }) {
   const fetcher = useFetcher();
   const inputId = useId();
 
@@ -22,10 +22,18 @@ export function ScoreForm({ elapsedTime }) {
             <input
               className="score-form__input"
               id={inputId}
-              name="player-name"
+              name="name"
+              placeholder="Name must be between 1 and 7 characters"
+              required
+              maxLength={7}
             />
           </div>
-          <button className="score-form__btn" type="submit">
+          <button
+            name="scoreForm"
+            value={gameId}
+            className="score-form__btn"
+            type="submit"
+          >
             Submit
           </button>
         </fetcher.Form>
@@ -36,4 +44,5 @@ export function ScoreForm({ elapsedTime }) {
 
 ScoreForm.propTypes = {
   elapsedTime: PropTypes.number,
+  gameId: PropTypes.string,
 };
