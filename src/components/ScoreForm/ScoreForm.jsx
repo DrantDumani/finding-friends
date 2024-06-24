@@ -12,7 +12,7 @@ export function ScoreForm({ elapsedTime, gameId }) {
     <div className="score-form-flex">
       <div className="score-form-wrapper">
         <h1 className="score-form-title">
-          Friends found in {convertMs(elapsedTime, true)}
+          Friends found in {convertMs(elapsedTime)}
         </h1>
         <fetcher.Form className="score-form" method="POST">
           <div className="score-form__label-wrapper">

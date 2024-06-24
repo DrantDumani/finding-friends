@@ -10,6 +10,7 @@ import {
   getThumbnails,
   getGameData,
   getGameInstance,
+  getScores,
 } from "../modules/loaders";
 import { createInstance, gameInstanceAction } from "../modules/actions";
 
@@ -49,10 +50,15 @@ export const routes = [
           {
             element: <LeaderboardSelector />,
             path: "leaderboards",
+            loader: getThumbnails,
+            shouldRevalidate: ({ currentUrl }) => {
+              return currentUrl.pathname.split("/")[1] !== "leaderboards";
+            },
             children: [
               {
                 path: ":gameId",
                 element: <Leaderboards />,
+                loader: getScores,
               },
             ],
           },

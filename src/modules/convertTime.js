@@ -9,3 +9,11 @@ export function convertMs(timestamp, includeMs = false) {
 
   return includeMs ? timeStr : timeStr.slice(0, 5);
 }
+
+export function convertDate(dateStr) {
+  const dateObj = new Date(dateStr);
+  const strArr = dateObj.toLocaleDateString("en-US").split("/");
+
+  strArr[2] = strArr[2].slice(2);
+  return strArr.join("/");
+}

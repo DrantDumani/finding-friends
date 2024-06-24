@@ -32,3 +32,15 @@ export async function getGameInstance({ params }) {
     throw new Response({ err: data.err });
   }
 }
+
+export async function getScores({ params }) {
+  const { gameId } = params;
+  const resp = await handleData(`scores/${gameId}`);
+  const data = resp.json();
+
+  if (resp.ok) {
+    return data;
+  } else {
+    return redirect("/error");
+  }
+}

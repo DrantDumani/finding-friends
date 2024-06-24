@@ -1,0 +1,40 @@
+@use "../../partials/mixins" as *;
+@use "../../partials/variables" as *;
+
+.leaderboard {
+  padding: 1.5rem $mob-hor-pad;
+  @include maxBreakpoint;
+  @include tablet {
+    padding: $tab-ver-pad $tab-hor-pad;
+  }
+  @include desktop {
+    padding-left: $desk-hor-pad;
+    padding-right: $desk-hor-pad;
+  }
+
+  &__link-grid {
+    @include game-grid;
+  }
+
+  &__link {
+    @include thumbnail-link;
+
+    &--selected img {
+      border-width: 5px;
+      box-shadow: 0px 0px 20px #0c0c0c;
+    }
+  }
+
+  &__image {
+    @include thumbnail;
+  }
+
+  &__img-caption {
+    font-size: $img-cap;
+  }
+
+  &__title {
+    text-align: center;
+    padding: 2.5rem 0 1.5rem 0;
+  }
+}
