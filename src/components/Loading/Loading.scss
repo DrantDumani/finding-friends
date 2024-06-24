@@ -1,0 +1,45 @@
+$translateVal: translateY(-10px) .loading-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+
+  &__letter {
+    transition: transform ease 0.2s;
+
+    &--L {
+      transform: $translateVal;
+      color: #ff0000;
+    }
+
+    &--o {
+      transform: $translateVal;
+      color: #ffa500;
+    }
+
+    &--a {
+      transform: $translateVal;
+      color: #ffff00;
+    }
+
+    &--d {
+      transform: $translateVal;
+      color: #00ff00;
+    }
+
+    &--i {
+      transform: $translateVal;
+      color: #0000ff;
+    }
+
+    &--n {
+      transform: $translateVal;
+      color: #4b0082;
+    }
+
+    &--g {
+      transform: $translateVal;
+      color: #8f00ff;
+    }
+  }
+}
