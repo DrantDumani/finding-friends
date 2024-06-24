@@ -2,16 +2,15 @@ import { useLoaderData, useFetcher } from "react-router-dom";
 import { useState, useEffect, useId, useRef } from "react";
 import { convertMs } from "../../modules/convertTime";
 import { Dropdown } from "../../components/Dropdown/Dropdown";
+import { GameBar } from "../../components/Gamebar/Gamebar";
 import "./GameInstance.scss";
 
 export function GameInstance() {
   const gameInfo = useLoaderData();
   const fetcher = useFetcher();
-  const currentTime = Date.now() - Date.parse(gameInfo.createdAt);
   const elapsedTime =
     gameInfo.updatedAt &&
     Date.parse(gameInfo.updatedAt) - Date.parse(gameInfo.createdAt);
-  const [timer, setTimer] = useState(currentTime);
   const [showChoices, setShowChoices] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const inputId = useId();
@@ -24,13 +23,6 @@ export function GameInstance() {
   };
 
   const removeDropdown = () => setShowChoices(false);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setTimer((t) => t + 1000);
-    }, 1000);
-    return () => clearInterval(id);
-  }, []);
 
   useEffect(() => {
     const toggleChoicesOff = (e) => {
@@ -49,23 +41,8 @@ export function GameInstance() {
 
   return !allFriendsFound ? (
     <div className="game-screen">
-      <div className="game-screen__gamebar">
-        <div className="game-screen__char-grid">
-          {gameInfo.chars.map((char) => (
-            <figure key={char._id}>
-              <img
-                className="game-screen__char-img"
-                src={char.char.image}
-                alt=""
-              />
-              <figcaption className="game-screen__caption">
-                {char.char.name}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-        <p className="game-screen__timer">{convertMs(timer).slice(0, 5)}</p>
-      </div>
+      <GameBar characters={gameInfo.chars} timeGameBegan={gameInfo.createdAt} />
+
       <div className="game-img-container">
         <img
           ref={imageRef}
