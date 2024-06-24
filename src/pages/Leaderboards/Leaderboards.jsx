@@ -27,7 +27,9 @@ export function Leaderboards() {
           </ul>
         </div>
       ) : (
-        <h2>No one has found friends here yet. Be the first!</h2>
+        <h2 className="no-scores-header">
+          No one has found friends here yet. Be the first!
+        </h2>
       )}
     </section>
   );
