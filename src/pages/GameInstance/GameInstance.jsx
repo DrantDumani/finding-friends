@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useFetcher } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { Dropdown } from "../../components/Dropdown/Dropdown";
 import { GameBar } from "../../components/Gamebar/Gamebar";
@@ -14,14 +14,13 @@ export function GameInstance() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [confirmText, setConfirmText] = useState({});
   const imageRef = useRef(null);
+  const fetcher = useFetcher();
 
   const displayDropdown = (e) => {
     setShowChoices(true);
     setMousePos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
     e.stopPropagation();
   };
-
-  const removeDropdown = () => setShowChoices(false);
 
   useEffect(() => {
     const toggleChoicesOff = (e) => {
@@ -31,6 +30,15 @@ export function GameInstance() {
 
     return () => document.body.removeEventListener("click", toggleChoicesOff);
   }, []);
+
+  useEffect(() => {
+    if (fetcher.state === "submitting") {
+      setConfirmText({ msg: "Confirming..." });
+    } else if (fetcher.data) {
+      setConfirmText(fetcher.data);
+      setShowChoices(false);
+    }
+  }, [fetcher]);
 
   const charsRemaining = gameInfo.chars
     .filter((char) => !char.found)
@@ -55,15 +63,15 @@ export function GameInstance() {
           alt="Find all the friends"
         />
         {showChoices && (
-          <Dropdown
-            gameInstanceId={gameInfo._id}
-            removeDropdown={removeDropdown}
-            btnList={charsRemaining}
-            mousePos={mousePos}
-            imgWidth={imageRef.current.offsetWidth}
-            imgHeight={imageRef.current.offsetHeight}
-            setConfirmText={setConfirmText}
-          />
+          <fetcher.Form method="PUT">
+            <Dropdown
+              gameInstanceId={gameInfo._id}
+              btnList={charsRemaining}
+              mousePos={mousePos}
+              imgWidth={imageRef.current.offsetWidth}
+              imgHeight={imageRef.current.offsetHeight}
+            />
+          </fetcher.Form>
         )}
       </div>
     </div>

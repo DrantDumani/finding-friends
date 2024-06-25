@@ -1,28 +1,9 @@
 import PropTypes from "prop-types";
 import "./Dropdown.scss";
-import { useRef, useEffect } from "react";
-import { useFetcher } from "react-router-dom";
+import { useRef } from "react";
 
-export function Dropdown({
-  btnList,
-  mousePos,
-  imgHeight,
-  imgWidth,
-  removeDropdown,
-  setConfirmText,
-}) {
+export function Dropdown({ btnList, mousePos, imgHeight, imgWidth }) {
   const dropdownRef = useRef(null);
-  const fetcher = useFetcher();
-
-  useEffect(() => {
-    console.log("lmao");
-    // if (fetcher.state === "submitting") {
-    //   setConfirmText({ msg: "Confirming..." });
-    if (fetcher.data) {
-      setConfirmText(fetcher.data);
-      removeDropdown();
-    }
-  }, [fetcher, removeDropdown, setConfirmText]);
 
   const xPos =
     (dropdownRef.current &&
@@ -39,7 +20,7 @@ export function Dropdown({
     mousePos.y;
 
   return (
-    <fetcher.Form
+    <div
       method="PUT"
       ref={dropdownRef}
       className="plyr-choice-container"
@@ -61,7 +42,7 @@ export function Dropdown({
           {choice.name}
         </button>
       ))}
-    </fetcher.Form>
+    </div>
   );
 }
 
