@@ -48,3 +48,12 @@
     background-color: #b245d9;
   }
 }
+
+@mixin disabled-btn {
+  background-color: #b4b4b4;
+  color: #000;
+  &:hover {
+    background-color: #b4b4b4;
+    color: #000;
+  }
+}

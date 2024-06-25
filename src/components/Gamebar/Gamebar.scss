@@ -37,4 +37,13 @@
   &__timer {
     font-size: 1.375rem;
   }
+
+  &__confirm-text {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.found-char {
+  opacity: 50%;
 }

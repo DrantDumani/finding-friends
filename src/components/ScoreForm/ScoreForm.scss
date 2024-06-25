@@ -45,5 +45,8 @@
 
   &__btn {
     @include form-btn;
+    &--disabled {
+      @include disabled-btn;
+    }
   }
 }

@@ -9,8 +9,10 @@ export function ScoreForm({ elapsedTime, gameId }) {
   const navigation = useNavigation();
   const fetcher = useFetcher();
   const inputId = useId();
+  const isNavigating =
+    navigation.state === "loading" || fetcher.state === "submitting";
 
-  return navigation.state !== "idle" ? (
+  return isNavigating ? (
     <Loading />
   ) : (
     <div className="score-form-flex">
@@ -35,7 +37,9 @@ export function ScoreForm({ elapsedTime, gameId }) {
           <button
             name="scoreForm"
             value={gameId}
-            className="score-form__btn"
+            className={`score-form__btn ${
+              isNavigating && "score-form__btn--disabled"
+            }`}
             type="submit"
           >
             Submit

@@ -11,7 +11,10 @@ export function Game() {
   };
   const fetcher = useFetcher();
 
-  return navigation.state === "loading" ? (
+  const isNavigating =
+    navigation.state === "loading" || fetcher.state === "submitting";
+
+  return isNavigating ? (
     <Loading />
   ) : (
     <div className="thumbnail-wrapper">
@@ -35,7 +38,14 @@ export function Game() {
           name="instance"
           value={JSON.stringify(instanceSkeleton)}
         />
-        <button className="thumbnail-wrapper__btn">Start</button>
+        <button
+          disabled={isNavigating}
+          className={`thumbnail-wrapper__btn ${
+            isNavigating && "thumbnail-wrapper__btn--disabled"
+          }`}
+        >
+          Start
+        </button>
       </fetcher.Form>
     </div>
   );

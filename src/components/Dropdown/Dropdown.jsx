@@ -9,13 +9,20 @@ export function Dropdown({
   imgHeight,
   imgWidth,
   removeDropdown,
+  setConfirmText,
 }) {
   const dropdownRef = useRef(null);
   const fetcher = useFetcher();
 
   useEffect(() => {
-    if (fetcher.data) removeDropdown();
-  }, [fetcher.data, removeDropdown]);
+    console.log("lmao");
+    // if (fetcher.state === "submitting") {
+    //   setConfirmText({ msg: "Confirming..." });
+    if (fetcher.data) {
+      setConfirmText(fetcher.data);
+      removeDropdown();
+    }
+  }, [fetcher, removeDropdown, setConfirmText]);
 
   const xPos =
     (dropdownRef.current &&
@@ -69,4 +76,5 @@ Dropdown.propTypes = {
   imgHeight: PropTypes.number,
   mousePos: PropTypes.objectOf(PropTypes.number),
   removeDropdown: PropTypes.func,
+  setConfirmText: PropTypes.func,
 };

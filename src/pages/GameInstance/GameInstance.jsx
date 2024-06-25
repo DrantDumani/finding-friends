@@ -12,6 +12,7 @@ export function GameInstance() {
     Date.parse(gameInfo.updatedAt) - Date.parse(gameInfo.createdAt);
   const [showChoices, setShowChoices] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [confirmText, setConfirmText] = useState({});
   const imageRef = useRef(null);
 
   const displayDropdown = (e) => {
@@ -39,7 +40,11 @@ export function GameInstance() {
 
   return !allFriendsFound ? (
     <div className="game-screen">
-      <GameBar characters={gameInfo.chars} timeGameBegan={gameInfo.createdAt} />
+      <GameBar
+        characters={gameInfo.chars}
+        timeGameBegan={gameInfo.createdAt}
+        confirmText={confirmText}
+      />
 
       <div className="game-img-container">
         <img
@@ -57,6 +62,7 @@ export function GameInstance() {
             mousePos={mousePos}
             imgWidth={imageRef.current.offsetWidth}
             imgHeight={imageRef.current.offsetHeight}
+            setConfirmText={setConfirmText}
           />
         )}
       </div>
