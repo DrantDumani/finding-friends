@@ -1,10 +1,14 @@
-import { useLoaderData, Link } from "react-router-dom";
+import { useLoaderData, useNavigation, Link } from "react-router-dom";
+import { Loading } from "../../components/Loading/Loading";
 import "./Home.scss";
 
 export function Home() {
-  const games = useLoaderData() || [];
+  const games = useLoaderData();
+  const navigation = useNavigation();
 
-  return (
+  return navigation.state === "loading" ? (
+    <Loading />
+  ) : (
     <div className="home">
       <h1 className="home__title">How To Play:</h1>
       <p className="home__rules">

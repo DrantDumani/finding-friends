@@ -4,7 +4,7 @@ import "./Game.scss";
 
 export function Game() {
   const navigation = useNavigation();
-  const gameData = useLoaderData() || {};
+  const gameData = useLoaderData();
   const instanceSkeleton = {
     gameId: gameData.game._id,
     chars: gameData.characters.map((char) => char._id),

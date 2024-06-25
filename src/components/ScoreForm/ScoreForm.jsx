@@ -1,14 +1,18 @@
 import { convertMs } from "../../modules/convertTime";
-import { useFetcher } from "react-router-dom";
+import { useFetcher, useNavigation } from "react-router-dom";
 import { useId } from "react";
 import PropTypes from "prop-types";
+import { Loading } from "../Loading/Loading";
 import "./ScoreForm.scss";
 
 export function ScoreForm({ elapsedTime, gameId }) {
+  const navigation = useNavigation();
   const fetcher = useFetcher();
   const inputId = useId();
 
-  return (
+  return navigation.state !== "idle" ? (
+    <Loading />
+  ) : (
     <div className="score-form-flex">
       <div className="score-form-wrapper">
         <h1 className="score-form-title">

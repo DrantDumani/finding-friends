@@ -1,12 +1,22 @@
-import { useLoaderData, useParams, Outlet, Link } from "react-router-dom";
+import {
+  useLoaderData,
+  useNavigation,
+  useParams,
+  Outlet,
+  Link,
+} from "react-router-dom";
+import { Loading } from "../../components/Loading/Loading";
 import "./LeaderboardSelector.scss";
 
 export function LeaderboardSelector() {
   const games = useLoaderData();
+  const navigation = useNavigation();
   const { gameId } = useParams();
   const selected = games.find((game) => game._id === gameId)?.name;
 
-  return (
+  return navigation.state === "loading" ? (
+    <Loading />
+  ) : (
     <div className="leaderboard">
       {games.length > 0 && (
         <div className="leaderboard__link-grid">

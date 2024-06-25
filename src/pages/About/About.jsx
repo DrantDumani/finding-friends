@@ -1,7 +1,13 @@
+import { Loading } from "../../components/Loading/Loading";
+import { useNavigation } from "react-router-dom";
 import "./About.scss";
 
 export function About() {
-  return (
+  const navigation = useNavigation();
+
+  return navigation.state === "loading" ? (
+    <Loading />
+  ) : (
     <div className="about-wrapper">
       <div className="about-credits">
         <section className="about-credits__section">
