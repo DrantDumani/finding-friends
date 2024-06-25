@@ -38,15 +38,12 @@ export const routes = [
             loader: getGameData,
             action: createInstance,
           },
-          // children: [
           {
             path: "gameInstance/:gameInstanceId",
             element: <GameInstance />,
             loader: getGameInstance,
             action: gameInstanceAction,
           },
-          // ],
-          // },
           {
             element: <LeaderboardSelector />,
             path: "leaderboards",

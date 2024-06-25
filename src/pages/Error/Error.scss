@@ -1,0 +1,15 @@
+.err-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+  gap: 1rem;
+
+  & a {
+    color: #0000ff;
+    &:hover {
+      color: #5a5aab;
+    }
+  }
+}
