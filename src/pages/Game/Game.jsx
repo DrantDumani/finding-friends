@@ -1,7 +1,9 @@
-import { useLoaderData, useFetcher } from "react-router-dom";
+import { useLoaderData, useFetcher, useNavigation } from "react-router-dom";
+import { Loading } from "../../components/Loading/Loading";
 import "./Game.scss";
 
 export function Game() {
+  const navigation = useNavigation();
   const gameData = useLoaderData() || {};
   const instanceSkeleton = {
     gameId: gameData.game._id,
@@ -9,7 +11,9 @@ export function Game() {
   };
   const fetcher = useFetcher();
 
-  return (
+  return navigation.state === "loading" ? (
+    <Loading />
+  ) : (
     <div className="thumbnail-wrapper">
       <h1 className="thumbnail-wrapper__title">Find all of these friends!</h1>
       <div className="thumbnail-grid">

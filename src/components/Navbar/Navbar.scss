@@ -2,7 +2,16 @@
 @use "../../partials/variables" as *;
 
 .nav {
+  padding: 1rem $mob-hor-pad;
   @include maxBreakpoint;
+  @include tablet {
+    padding-left: $tab-hor-pad;
+    padding-right: $tab-hor-pad;
+  }
+  @include desktop {
+    padding-left: $desk-hor-pad;
+    padding-right: $desk-hor-pad;
+  }
 }
 
 .nav-list {

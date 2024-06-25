@@ -6,6 +6,7 @@
   flex-direction: column;
   gap: 1.5rem;
   padding: 1.5rem $mob-hor-pad;
+  @include maxBreakpoint;
   @include tablet {
     padding: $tab-hor-pad $tab-ver-pad;
   }
