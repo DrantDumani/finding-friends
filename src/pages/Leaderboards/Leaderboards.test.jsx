@@ -40,7 +40,7 @@ describe("Leaderboard", () => {
     expect(scores.length).toBe(3);
   });
 
-  it("renders score in mm:ss:ms format", async () => {
+  it("renders score in mm:ss format", async () => {
     const mockRoute = [
       {
         path: "/",
@@ -53,7 +53,7 @@ describe("Leaderboard", () => {
     render(<RouterProvider router={router} />);
 
     const times = await screen.findAllByTestId("score-time");
-    expect(times[0].textContent).toBe("02:18:95");
+    expect(times[0].textContent).toBe("02:18");
   });
 
   it("renders 'No one has found friends here yet' if there are no leaderboard entries", async () => {

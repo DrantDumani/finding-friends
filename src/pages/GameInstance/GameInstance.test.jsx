@@ -109,7 +109,7 @@ describe("Game Instance", () => {
     render(<RouterProvider router={router} />);
     const [inputLabel, scoreText] = await Promise.all([
       await screen.findByLabelText("Enter your name"),
-      await screen.findByText("Friends found in 00:20:00"),
+      await screen.findByText("Friends found in 00:20"),
     ]);
 
     expect(inputLabel).toBeInTheDocument();
