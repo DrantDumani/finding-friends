@@ -28,7 +28,12 @@ export function Home() {
               to={`game/${game._id}`}
             >
               <figure>
-                <img className="link-grid__image" src={game.thumbnail} alt="" />
+                <img
+                  crossOrigin="anonymous"
+                  className="link-grid__image"
+                  src={game.thumbnail}
+                  alt=""
+                />
                 <figcaption className="link-grid__caption">
                   {game.name}
                 </figcaption>

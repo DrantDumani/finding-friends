@@ -30,6 +30,7 @@ export function LeaderboardSelector() {
             >
               <figure>
                 <img
+                  crossOrigin="anonymous"
                   className="leaderboard__image"
                   src={game.thumbnail}
                   alt={game.name}

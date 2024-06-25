@@ -36,6 +36,7 @@ export function GameBar({ characters, timeGameBegan, confirmText }) {
             key={charObj._id}
           >
             <img
+              crossOrigin="anonymous"
               className="gamebar__char-img"
               src={charObj.char.image}
               alt=""

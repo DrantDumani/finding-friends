@@ -22,7 +22,12 @@ export function Game() {
       <div className="thumbnail-grid">
         {gameData.characters.map((char) => (
           <figure key={char._id}>
-            <img className="thumbnail-grid__image" src={char.image} alt="" />
+            <img
+              crossOrigin="anonymous"
+              className="thumbnail-grid__image"
+              src={char.image}
+              alt=""
+            />
             <figcaption
               className="thumbnail-grid__caption"
               data-testid="char-name"

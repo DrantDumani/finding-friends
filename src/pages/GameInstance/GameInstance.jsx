@@ -57,6 +57,7 @@ export function GameInstance() {
       <div className="game-img-container">
         <img
           ref={imageRef}
+          crossOrigin="anonymous"
           className="game-img-container__img"
           onClick={displayDropdown}
           src={gameInfo.gameId.image}
