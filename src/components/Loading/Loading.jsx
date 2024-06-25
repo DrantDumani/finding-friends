@@ -9,7 +9,7 @@ export function Loading() {
   useEffect(() => {
     const id = setInterval(() => {
       setAnimateIndex((n) => (n + 1) % letters.length);
-    }, 200);
+    }, 100);
 
     return () => clearInterval(id);
   }, []);

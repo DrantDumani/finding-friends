@@ -1,11 +1,16 @@
-$translateVal: translateY(-10px) .loading-wrapper {
+$translateVal: translateY(-10px);
+
+.loading-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000;
+  background-color: #131313;
+  height: 100%;
 
   &__letter {
     transition: transform ease 0.2s;
+    color: #fff;
+    font-size: 3rem;
 
     &--L {
       transform: $translateVal;
