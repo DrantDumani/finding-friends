@@ -4,7 +4,10 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 const mockData = {
-  chars: [
+  game: {
+    _id: 333,
+  },
+  characters: [
     {
       _id: 1,
       name: "Poppy",
@@ -43,7 +46,7 @@ describe("Game page", () => {
     expect(images.length).toBe(3);
     expect(names.length).toBe(3);
     expect(names[0].textContent).toBe("Poppy");
-    expect(images[0]).toHaveAttribute("src", mockData.chars[0].image);
+    expect(images[0]).toHaveAttribute("src", mockData.characters[0].image);
   });
 
   it("renders a start button for the game", async () => {

@@ -6,6 +6,7 @@
   flex-direction: column;
   gap: 1.5rem;
   padding: 1.5rem $mob-hor-pad;
+  @include maxBreakpoint;
   @include tablet {
     padding: $tab-hor-pad $tab-ver-pad;
   }
@@ -16,7 +17,11 @@
 }
 
 .link-grid {
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  @include game-grid;
+
+  &__link {
+    @include thumbnail-link;
+  }
 
   &__image {
     @include thumbnail;

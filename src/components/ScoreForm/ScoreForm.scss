@@ -1,0 +1,52 @@
+@use "../../partials/mixins" as *;
+
+.score-form-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.score-form-wrapper {
+  border: 2px solid #000;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.score-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  &__label-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__label {
+    color: #1e1e1e;
+  }
+
+  &__input {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1.5px solid #000;
+    font-family: inherit;
+
+    &:focus {
+      border: none;
+      outline: 2.5px solid #5d1259;
+    }
+  }
+
+  &__btn {
+    @include form-btn;
+    &--disabled {
+      @include disabled-btn;
+    }
+  }
+}

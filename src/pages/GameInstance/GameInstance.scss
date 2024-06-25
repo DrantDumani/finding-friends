@@ -1,0 +1,11 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+
+.game-img-container {
+  position: relative;
+
+  &__img {
+    width: 100%;
+    display: block;
+  }
+}

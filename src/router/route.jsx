@@ -6,6 +6,13 @@ import { Home } from "../pages/Home/Home";
 import { Leaderboards } from "../pages/Leaderboards/Leaderboards";
 import { Error } from "../pages/Error/Error";
 import { LeaderboardSelector } from "../pages/LeaderboardSelector/LeaderboardSelector";
+import {
+  getThumbnails,
+  getGameData,
+  getGameInstance,
+  getScores,
+} from "../modules/loaders";
+import { createInstance, gameInstanceAction } from "../modules/actions";
 
 export const routes = [
   {
@@ -18,6 +25,7 @@ export const routes = [
         children: [
           {
             element: <Home />,
+            loader: getThumbnails,
             index: true,
           },
           {
@@ -27,20 +35,27 @@ export const routes = [
           {
             element: <Game />,
             path: "game/:gameId",
-            children: [
-              {
-                path: ":gameId",
-                element: <GameInstance />,
-              },
-            ],
+            loader: getGameData,
+            action: createInstance,
+          },
+          {
+            path: "gameInstance/:gameInstanceId",
+            element: <GameInstance />,
+            loader: getGameInstance,
+            action: gameInstanceAction,
           },
           {
             element: <LeaderboardSelector />,
             path: "leaderboards",
+            loader: getThumbnails,
+            shouldRevalidate: ({ currentUrl }) => {
+              return currentUrl.pathname.split("/")[1] !== "leaderboards";
+            },
             children: [
               {
                 path: ":gameId",
                 element: <Leaderboards />,
+                loader: getScores,
               },
             ],
           },

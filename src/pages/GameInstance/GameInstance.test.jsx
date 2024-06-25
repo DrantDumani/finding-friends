@@ -5,21 +5,18 @@ import { expect, it, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 
 const mockData = {
-  _id: 1,
-  gameId: 1,
-  image: "ripple_star.png",
+  gameId: {
+    _id: 1,
+    image: "ripple_star.png",
+  },
   createdAt: new Date(Date.now() - 20000),
   chars: [
     {
-      _id: "1",
-      name: "Miracle",
-      image: "miracle_matter.png",
+      char: { _id: "1", name: "Miracle", image: "miracle_matter.png" },
       found: false,
     },
     {
-      _id: "2",
-      name: "Dark",
-      image: "dark_matter.png",
+      char: { _id: "2", name: "Dark", image: "dark_matter.png" },
       found: true,
     },
   ],
@@ -112,7 +109,7 @@ describe("Game Instance", () => {
     render(<RouterProvider router={router} />);
     const [inputLabel, scoreText] = await Promise.all([
       await screen.findByLabelText("Enter your name"),
-      await screen.findByText("Friends found in 00:20:00"),
+      await screen.findByText("Friends found in 00:20"),
     ]);
 
     expect(inputLabel).toBeInTheDocument();
@@ -121,15 +118,12 @@ describe("Game Instance", () => {
 
   it("increments timer every second", async () => {
     const router = createMemoryRouter(mockRoute);
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    vi.advanceTimersByTime(1200);
     render(<RouterProvider router={router} />);
-    const time = await screen.findByText("00:20");
-    expect(time).toBeInTheDocument();
 
-    vi.useFakeTimers();
-    vi.advanceTimersByTime(9000);
-    vi.clearAllTimers();
     const updatedTime = await screen.findByText("00:21");
-
+    vi.clearAllTimers();
     expect(updatedTime.textContent).toBe("00:21");
   });
 });
