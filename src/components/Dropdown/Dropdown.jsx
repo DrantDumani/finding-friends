@@ -1,23 +1,30 @@
 import PropTypes from "prop-types";
 import "./Dropdown.scss";
-import { useRef } from "react";
+import { useRef, useState, useLayoutEffect } from "react";
 
 export function Dropdown({ btnList, mousePos, imgHeight, imgWidth }) {
   const dropdownRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useLayoutEffect(() => {
+    if (dropdownRef.current) {
+      console.log("huh");
+      setDimensions({
+        width: dropdownRef.current.offsetWidth,
+        height: dropdownRef.current.offsetHeight,
+      });
+    }
+  }, []);
 
   const xPos =
-    (dropdownRef.current &&
-      (mousePos.x + dropdownRef.current.offsetWidth < imgWidth
-        ? mousePos.x
-        : mousePos.x - dropdownRef.current.offsetWidth)) ||
-    mousePos.x;
+    mousePos.x + dimensions.width < imgWidth
+      ? mousePos.x
+      : mousePos.x - dimensions.width;
 
   const yPos =
-    (dropdownRef.current &&
-      (mousePos.y + dropdownRef.current.offsetHeight < imgHeight
-        ? mousePos.y
-        : mousePos.y - dropdownRef.current.offsetHeight)) ||
-    mousePos.y;
+    mousePos.y + dimensions.height < imgHeight
+      ? mousePos.y
+      : mousePos.y - dimensions.height;
 
   return (
     <div
