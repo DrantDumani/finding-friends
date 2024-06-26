@@ -10,7 +10,7 @@ export function GameBar({ characters, timeGameBegan, confirmText }) {
   const [showConfirmText, setShowConfirmText] = useState(false);
 
   useEffect(() => {
-    if (confirmText) {
+    if (confirmText.msg) {
       setShowConfirmText(true);
       const id = setTimeout(() => {
         setShowConfirmText(false);
