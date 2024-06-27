@@ -2,13 +2,18 @@ import PropTypes from "prop-types";
 import "./Dropdown.scss";
 import { useRef, useState, useLayoutEffect } from "react";
 
-export function Dropdown({ btnList, mousePos, imgHeight, imgWidth }) {
+export function Dropdown({
+  btnList,
+  mousePos,
+  imgHeight,
+  imgWidth,
+  removeDropdown,
+}) {
   const dropdownRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useLayoutEffect(() => {
     if (dropdownRef.current) {
-      console.log("huh");
       setDimensions({
         width: dropdownRef.current.offsetWidth,
         height: dropdownRef.current.offsetHeight,
@@ -28,7 +33,6 @@ export function Dropdown({ btnList, mousePos, imgHeight, imgWidth }) {
 
   return (
     <div
-      method="PUT"
       ref={dropdownRef}
       className="plyr-choice-container"
       style={{
@@ -38,6 +42,13 @@ export function Dropdown({ btnList, mousePos, imgHeight, imgWidth }) {
     >
       <input type="hidden" name="xPos" value={mousePos.x / imgWidth} />
       <input type="hidden" name="yPos" value={mousePos.y / imgHeight} />
+      <button
+        onClick={removeDropdown}
+        type="button"
+        className="plyr-choice-container__btnClose"
+      >
+        X
+      </button>
       {btnList.map((choice) => (
         <button
           type="submit"
@@ -64,5 +75,4 @@ Dropdown.propTypes = {
   imgHeight: PropTypes.number,
   mousePos: PropTypes.objectOf(PropTypes.number),
   removeDropdown: PropTypes.func,
-  setConfirmText: PropTypes.func,
 };

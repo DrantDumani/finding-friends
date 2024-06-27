@@ -22,6 +22,8 @@ export function GameInstance() {
     e.stopPropagation();
   };
 
+  const removeDropdown = () => setShowChoices(false);
+
   useEffect(() => {
     const toggleChoicesOff = (e) => {
       if (e.target.nodeName !== "BUTTON") setShowChoices(false);
@@ -71,6 +73,7 @@ export function GameInstance() {
               mousePos={mousePos}
               imgWidth={imageRef.current.offsetWidth}
               imgHeight={imageRef.current.offsetHeight}
+              removeDropdown={removeDropdown}
             />
           </fetcher.Form>
         )}
