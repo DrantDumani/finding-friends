@@ -1,9 +1,10 @@
-import { useLoaderData, useFetcher } from "react-router-dom";
+import { useLoaderData, useFetcher, useNavigation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { Dropdown } from "../../components/Dropdown/Dropdown";
 import { GameBar } from "../../components/Gamebar/Gamebar";
 import { ScoreForm } from "../../components/ScoreForm/ScoreForm";
 import "./GameInstance.scss";
+import { Loading } from "../../components/Loading/Loading";
 
 export function GameInstance() {
   const gameInfo = useLoaderData();
@@ -15,6 +16,7 @@ export function GameInstance() {
   const [confirmText, setConfirmText] = useState({});
   const imageRef = useRef(null);
   const fetcher = useFetcher();
+  const navigation = useNavigation();
 
   const displayDropdown = (e) => {
     setShowChoices(true);
@@ -48,7 +50,9 @@ export function GameInstance() {
 
   const allFriendsFound = gameInfo.chars.every((char) => char.found);
 
-  return !allFriendsFound ? (
+  return navigation.state === "loading" ? (
+    <Loading />
+  ) : !allFriendsFound ? (
     <div className="game-screen">
       <GameBar
         characters={gameInfo.chars}

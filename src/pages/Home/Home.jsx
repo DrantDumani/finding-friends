@@ -33,6 +33,8 @@ export function Home() {
                   className="link-grid__image"
                   src={game.thumbnail}
                   alt=""
+                  width="287"
+                  height="160"
                 />
                 <figcaption className="link-grid__caption">
                   {game.name}

@@ -34,6 +34,8 @@ export function LeaderboardSelector() {
                   className="leaderboard__image"
                   src={game.thumbnail}
                   alt={game.name}
+                  width="287"
+                  height="160"
                 />
                 <figcaption className="leaderboard__img-caption">
                   {game.name}
