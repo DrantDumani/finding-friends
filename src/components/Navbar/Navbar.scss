@@ -20,7 +20,7 @@
   flex-wrap: wrap;
   gap: 1rem 2rem;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
 
   @include tablet {
     justify-content: normal;
@@ -46,8 +46,7 @@
     text-decoration: none;
 
     &--large {
-      font-size: 1.75rem;
-      text-align: center;
+      display: flex;
     }
 
     &:hover {

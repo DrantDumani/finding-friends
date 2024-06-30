@@ -1,21 +1,10 @@
 import { useLoaderData, useNavigation, Link } from "react-router-dom";
 import { Loading } from "../../components/Loading/Loading";
 import "./Home.scss";
-import { useState, useEffect } from "react";
 
 export function Home() {
   const games = useLoaderData();
   const navigation = useNavigation();
-  const [imgLinks, setImgLinks] = useState([]);
-
-  useEffect(() => {
-    const id = setTimeout(() => {
-      const links = games.map((game) => game.thumbnail);
-      setImgLinks(links);
-    }, 5000);
-
-    return () => clearTimeout(id);
-  });
 
   return navigation.state === "loading" ? (
     <Loading />
@@ -32,7 +21,7 @@ export function Home() {
 
       {games.length > 0 && (
         <div className="link-grid">
-          {games.map((game, i) => (
+          {games.map((game) => (
             <Link
               className="link-grid__link"
               key={game._id}
@@ -42,7 +31,7 @@ export function Home() {
                 <img
                   crossOrigin="anonymous"
                   className="link-grid__image"
-                  src={imgLinks[i]}
+                  src={game.thumbnail}
                   alt=""
                   width="287"
                   height="160"
