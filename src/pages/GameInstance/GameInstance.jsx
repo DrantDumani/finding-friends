@@ -56,7 +56,7 @@ export function GameInstance() {
     <div className="game-screen">
       <GameBar
         characters={gameInfo.chars}
-        timeGameBegan={gameInfo.createdAt}
+        elapsedTime={gameInfo.elapsedTime}
         confirmText={confirmText}
       />
 
