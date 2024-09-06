@@ -3,9 +3,9 @@ import { convertMs } from "../../modules/convertTime";
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-export function GameBar({ characters, timeGameBegan, confirmText }) {
-  const parsedTime = Date.parse(timeGameBegan);
-  const initialTime = Date.now() - parsedTime;
+export function GameBar({ characters, elapsedTime, confirmText }) {
+  const parsedTime = Date.now(elapsedTime);
+  const initialTime = elapsedTime;
   const [timePassed, setTimePassed] = useState(initialTime);
   const [showConfirmText, setShowConfirmText] = useState(false);
 
@@ -22,7 +22,7 @@ export function GameBar({ characters, timeGameBegan, confirmText }) {
 
   useEffect(() => {
     const id = setInterval(() => {
-      setTimePassed(Date.now() - parsedTime);
+      setTimePassed((t) => t + 1000);
     }, 1000);
     return () => clearInterval(id);
   }, [parsedTime]);
@@ -57,6 +57,6 @@ export function GameBar({ characters, timeGameBegan, confirmText }) {
 
 GameBar.propTypes = {
   characters: PropTypes.arrayOf(PropTypes.object),
-  timeGameBegan: PropTypes.string,
+  elapsedTime: PropTypes.number,
   confirmText: PropTypes.objectOf(PropTypes.string),
 };
