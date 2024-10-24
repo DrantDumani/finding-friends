@@ -1,7 +1,7 @@
 const apiStr =
   import.meta.env.MODE === "development"
     ? "http://localhost:3000/"
-    : "https://finding-friends-api.adaptable.app/";
+    : "https://vivacious-heliotrope-tarragon.glitch.me/";
 
 export const handleData = async (
   endPoint,
