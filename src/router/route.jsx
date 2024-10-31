@@ -39,7 +39,7 @@ export const routes = [
             action: createInstance,
           },
           {
-            path: "gameInstance/:gameInstanceId",
+            path: "gameInstance/:gameId",
             element: <GameInstance />,
             loader: getGameInstance,
             action: gameInstanceAction,

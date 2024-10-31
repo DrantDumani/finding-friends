@@ -1,14 +1,13 @@
 import { useLoaderData, useFetcher, useNavigation } from "react-router-dom";
 import { Loading } from "../../components/Loading/Loading";
 import "./Game.scss";
+import { jwtDecode } from "jwt-decode";
 
 export function Game() {
   const navigation = useNavigation();
-  const gameData = useLoaderData();
-  const instanceSkeleton = {
-    gameId: gameData.game._id,
-    chars: gameData.characters.map((char) => char._id),
-  };
+  const gameToken = useLoaderData();
+  const gameData = jwtDecode(gameToken);
+
   const fetcher = useFetcher();
 
   const isNavigating =
@@ -38,11 +37,6 @@ export function Game() {
         ))}
       </div>
       <fetcher.Form className="thumbnail-wrapper__gameForm" method="POST">
-        <input
-          type="hidden"
-          name="instance"
-          value={JSON.stringify(instanceSkeleton)}
-        />
         <button
           disabled={isNavigating}
           className={`thumbnail-wrapper__btn ${

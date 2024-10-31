@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 import { handleData } from "./handleData";
 import { redirect } from "react-router-dom";
 
@@ -15,21 +16,26 @@ export async function getGameData({ params }) {
   const { gameId } = params;
   const resp = await handleData(`games/${gameId}`);
   if (resp.ok) {
-    const gameData = await resp.json();
-    return gameData;
+    const gameToken = await resp.json();
+    localStorage.setItem("token", gameToken);
+    return gameToken;
   } else {
     return redirect("/error");
   }
 }
 
-export async function getGameInstance({ params }) {
-  const { gameInstanceId } = params;
-  const resp = await handleData(`gameInstances/${gameInstanceId}`);
-  const data = resp.json();
-  if (resp.ok) {
-    return data;
+export function getGameInstance({ params }) {
+  const { gameId } = params;
+  const gameToken = localStorage.getItem("token");
+  if (!gameToken) {
+    throw new Response("Invalid or expired game session");
   } else {
-    throw new Response({ err: data.err });
+    const gameData = jwtDecode(gameToken);
+    if (gameData.exp * 1000 < Date.now() || gameData.game._id !== gameId) {
+      localStorage.removeItem("token");
+      throw new Response("Invalid or expired game session");
+    }
+    return gameData;
   }
 }
 

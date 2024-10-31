@@ -1,16 +1,15 @@
 import { handleData } from "./handleData";
 import { redirect } from "react-router-dom";
 
-export async function createInstance({ request }) {
-  const formData = await request.formData();
-  const instance = formData.get("instance");
+export async function createInstance({ params }) {
+  const { gameId } = params;
 
-  const { gameId } = JSON.parse(instance);
-  const resp = await handleData(`gameInstances/${gameId}`, instance, "POST");
+  const resp = await handleData(`gameInstances/${gameId}`, undefined, "POST");
   const data = await resp.json();
   if (resp.ok) {
-    const { _id } = data;
-    return redirect(`/gameInstance/${_id}`);
+    const instanceToken = data;
+    localStorage.setItem("token", instanceToken);
+    return redirect(`/gameInstance/${gameId}`);
   } else {
     throw new Response(data);
   }
@@ -18,7 +17,7 @@ export async function createInstance({ request }) {
 
 export async function gameInstanceAction({ request, params }) {
   const formData = await request.formData();
-  const { gameInstanceId } = params;
+  const { gameId } = params;
   const characterId = formData.get("characterId");
   const scoreFormGameId = formData.get("scoreForm");
 
@@ -32,12 +31,13 @@ export async function gameInstanceAction({ request, params }) {
     };
 
     const resp = await handleData(
-      `gameInstances/${gameInstanceId}/${characterId}`,
+      `gameInstances/${characterId}`,
       JSON.stringify(input),
       "PUT"
     );
     const data = await resp.json();
     if (resp.ok) {
+      localStorage.setItem("token", data.newToken);
       return data;
     } else {
       throw new Response(data);
@@ -45,13 +45,14 @@ export async function gameInstanceAction({ request, params }) {
   } else if (scoreFormGameId) {
     const input = { name: formData.get("name") };
     const resp = await handleData(
-      `scores/${gameInstanceId}`,
+      `scores/${gameId}`,
       JSON.stringify(input),
       "POST"
     );
     const data = await resp.json();
 
     if (resp.ok) {
+      localStorage.removeItem("token");
       return redirect(`/leaderboards/${scoreFormGameId}`);
     } else {
       throw new Response(data.err, { status: resp.status });
