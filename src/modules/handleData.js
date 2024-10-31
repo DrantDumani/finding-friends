@@ -1,7 +1,7 @@
 const apiStr =
   import.meta.env.MODE === "development"
     ? "http://localhost:3000/"
-    : "https://vivacious-heliotrope-tarragon.glitch.me/";
+    : "https://super-living-antique.glitch.me/";
 
 export const handleData = async (
   endPoint,
