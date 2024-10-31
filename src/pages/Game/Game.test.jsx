@@ -1,7 +1,7 @@
 import { Game } from "./Game";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 const mockData = {
   game: {
@@ -26,11 +26,15 @@ const mockData = {
   ],
 };
 
+vi.mock("jwt-decode", () => ({
+  jwtDecode: () => mockData,
+}));
+
 const mockRoute = [
   {
     path: "/",
     element: <Game />,
-    loader: async () => mockData,
+    loader: async () => "token",
   },
 ];
 

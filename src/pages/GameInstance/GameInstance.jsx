@@ -9,8 +9,7 @@ import { Loading } from "../../components/Loading/Loading";
 export function GameInstance() {
   const gameInfo = useLoaderData();
   const elapsedTime =
-    gameInfo.updatedAt &&
-    Date.parse(gameInfo.updatedAt) - Date.parse(gameInfo.createdAt);
+    gameInfo.updatedAt && gameInfo.updatedAt - gameInfo.iat * 1000;
   const [showChoices, setShowChoices] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [confirmText, setConfirmText] = useState({});
@@ -44,19 +43,17 @@ export function GameInstance() {
     }
   }, [fetcher]);
 
-  const charsRemaining = gameInfo.chars
-    .filter((char) => !char.found)
-    .map((char) => ({ _id: char.char._id, name: char.char.name }));
+  const charsRemaining = gameInfo.characters.filter((char) => !char.found);
 
-  const allFriendsFound = gameInfo.chars.every((char) => char.found);
+  const allFriendsFound = gameInfo.characters.every((char) => char.found);
 
   return navigation.state === "loading" ? (
     <Loading />
   ) : !allFriendsFound ? (
     <div className="game-screen">
       <GameBar
-        characters={gameInfo.chars}
-        elapsedTime={gameInfo.elapsedTime}
+        characters={gameInfo.characters}
+        elapsedTime={gameInfo.iat * 1000}
         confirmText={confirmText}
       />
 
@@ -66,7 +63,7 @@ export function GameInstance() {
           crossOrigin="anonymous"
           className="game-img-container__img"
           onClick={displayDropdown}
-          src={gameInfo.gameId.image}
+          src={gameInfo.game.image}
           alt="Find all the friends"
         />
         {showChoices && (
@@ -84,6 +81,6 @@ export function GameInstance() {
       </div>
     </div>
   ) : (
-    <ScoreForm elapsedTime={elapsedTime} gameId={gameInfo.gameId._id} />
+    <ScoreForm elapsedTime={elapsedTime} gameId={gameInfo.game._id} />
   );
 }

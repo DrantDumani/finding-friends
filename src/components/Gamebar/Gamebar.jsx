@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 export function GameBar({ characters, elapsedTime, confirmText }) {
-  const parsedTime = Date.now(elapsedTime);
-  const initialTime = elapsedTime;
+  const parsedTime = elapsedTime;
+  const initialTime = Date.now() - elapsedTime;
   const [timePassed, setTimePassed] = useState(initialTime);
   const [showConfirmText, setShowConfirmText] = useState(false);
 
@@ -38,12 +38,10 @@ export function GameBar({ characters, elapsedTime, confirmText }) {
             <img
               crossOrigin="anonymous"
               className="gamebar__char-img"
-              src={charObj.char.image}
+              src={charObj.image}
               alt=""
             />
-            <figcaption className="gamebar__caption">
-              {charObj.char.name}
-            </figcaption>
+            <figcaption className="gamebar__caption">{charObj.name}</figcaption>
           </figure>
         ))}
       </div>

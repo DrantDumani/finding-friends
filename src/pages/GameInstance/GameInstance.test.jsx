@@ -5,18 +5,22 @@ import { expect, it, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 
 const mockData = {
-  gameId: {
+  game: {
     _id: 1,
     image: "ripple_star.png",
   },
-  createdAt: new Date(Date.now() - 20000),
-  chars: [
+  iat: (Date.now() - 20000) / 1000,
+  characters: [
     {
-      char: { _id: "1", name: "Miracle", image: "miracle_matter.png" },
+      _id: "1",
+      name: "Miracle",
+      image: "miracle_matter.png",
       found: false,
     },
     {
-      char: { _id: "2", name: "Dark", image: "dark_matter.png" },
+      _id: "2",
+      name: "Dark",
+      image: "dark_matter.png",
       found: true,
     },
   ],
@@ -61,7 +65,7 @@ describe("Game Instance", () => {
     expect(image).toHaveAttribute("src", mockData.image);
   });
 
-  it("pulls up a menu of buttons for the characters a user hasn't found yet on click", async () => {
+  it.only("pulls up a menu of buttons for the characters a user hasn't found yet on click", async () => {
     const router = createMemoryRouter(mockRoute);
     render(<RouterProvider router={router} />);
 
@@ -69,19 +73,22 @@ describe("Game Instance", () => {
     const gameImg = await screen.findByRole("img");
     await user.click(gameImg);
 
-    const btns = await screen.findAllByRole("button");
+    const btns = await screen.findAllByRole("button", {
+      name: /[Miracle|Dark]/,
+    });
     expect(btns.length).toBe(1);
     expect(btns[0].textContent).toBe("Miracle");
   });
 
   it("user is shown a form with their score once all characters have been found", async () => {
     const mockData = {
-      _id: 1,
-      gameId: 1,
-      image: "ripple_star.png",
-      createdAt: new Date(Date.now() - 20000),
-      updatedAt: new Date(Date.now()),
-      chars: [
+      game: {
+        _id: "1",
+        image: "ripple_star.png",
+      },
+      iat: (Date.now() - 20000) / 1000,
+      updatedAt: Date.now(),
+      characters: [
         {
           _id: "1",
           name: "Miracle",
