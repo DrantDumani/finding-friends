@@ -10,7 +10,7 @@ export function GameInstance() {
   const gameInfo = useLoaderData();
   // handle seconds discrepency between client and server
   gameInfo.iat =
-    Date.now() - gameInfo.iat * 1000 < 5 ? Date.now() : gameInfo.iat;
+    Date.now() - gameInfo.iat * 1000 < 5 ? Date.now() / 1000 : gameInfo.iat;
   const elapsedTime =
     gameInfo.updatedAt && gameInfo.updatedAt - gameInfo.iat * 1000;
   const [showChoices, setShowChoices] = useState(false);
