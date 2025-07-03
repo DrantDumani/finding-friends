@@ -1,7 +1,7 @@
 const apiStr =
   import.meta.env.MODE === "development"
     ? "http://localhost:3000/"
-    : "https://super-living-antique.glitch.me/";
+    : "https://finding-friends-api.onrender.com/";
 
 export const handleData = async (
   endPoint,
